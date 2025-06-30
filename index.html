@@ -1,162 +1,320 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Citations Motivation Technologie</title>
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pensées Inspirantes</title>
   <style>
-    .citation-container {
-      max-width: 800px;
-      margin: 50px auto;
-      background-color: #3d0066;
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1b1b1b;
       color: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      scroll-behavior: smooth;
+      transition: background-color 0.6s ease;
+    }
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.7);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+      z-index: 1000;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 24px;
+    }
+    .logo img {
+      width: 40px; height: 40px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+    nav.menu {
+      display: flex;
+      gap: 30px;
+    }
+    nav.menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 6px 0;
+      position: relative;
+    }
+    nav.menu a:hover,
+    nav.menu a.active {
+      color: #f9c74f;
+    }
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      width: 26px;
+    }
+    .burger div {
+      height: 3px;
+      background-color: white;
+      border-radius: 2px;
+    }
+    .section {
+  padding: 100px 20px 50px 20px;
+  max-width: 900px;
+  margin: auto;
+  min-height: 100vh;
+  padding-top: 80px;
+  box-sizing: border-box;
+}
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2.8rem;
       text-align: center;
     }
-
-    .citation {
-      font-size: 1.4rem;
-      margin: 20px 0;
-      background-color: #5a2393;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00000080;
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 25px;
+    }
+    #accueil {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
     }
 
-    .citation span {
-      flex: 1;
-      text-align: left;
-    }
-
-    .supprimer-btn {
-  margin-left: 15px;
-  padding: 5px 10px;
-  background-color: #b366ff;
-  color: #2c003e;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: bold;
-  transition: background-color 0.3s;
+    .thought-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
 }
 
-.supprimer-btn:hover {
-  background-color: #9933ff;
-}
-
-
-    h1 {
-      color: #d9b3ff;
+    #thought-image {
+      max-width: 100%;
+      max-height: 320px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+      margin-bottom: 15px;
+      transition: opacity 0.6s ease;
     }
-
-    .add-section {
-      margin-top: 30px;
+    #thought {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      max-width: 750px;
+      margin-bottom: 30px;
+      padding: 0 10px;
     }
-
-    .add-section input {
-      padding: 10px;
-      width: 70%;
+    #next-btn {
+      background-color: #f9c74f;
       border: none;
-      border-radius: 5px;
-      margin-right: 10px;
-      background-color: #5a2393;
-      color: white;
-    }
-
-    .add-section button {
-      padding: 10px 20px;
-      background-color: #b366ff;
-      border: none;
-      border-radius: 5px;
-      color: #2c003e;
+      color: #333;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 12px 28px;
+      border-radius: 30px;
       cursor: pointer;
-      font-weight: bold;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    #next-btn:hover {
+      background-color: #fcbf49;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    input, textarea {
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    input[type="submit"] {
+      background-color: #f9c74f;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      color: #333;
+      padding: 14px 0;
+      transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+      background-color: #fcbf49;
+    }
+    @media (max-width: 720px) {
+      nav.menu {
+        display: none;
+        flex-direction: column;
+        background: rgba(0,0,0,0.9);
+        position: fixed;
+        top: 60px;
+        right: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.9);
+      }
+      nav.menu.show {
+        display: flex;
+      }
+      nav.menu a {
+        padding: 15px 0;
+        font-size: 20px;
+        border-bottom: 1px solid #f9c74f;
+      }
+      nav.menu a:last-child {
+        border-bottom: none;
+      }
+      .burger {
+        display: flex;
+      }
+      #accueil {
+        padding-top: 120px;
+      }
     }
   </style>
 </head>
 <body>
 
+<header>
+  <div class="logo">
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=80&q=80" alt="Logo montagne" />
+    Pensées Inspirantes
+  </div>
+  <nav class="menu" id="menu">
+    <a href="#accueil" class="active">Accueil</a>
+    <a href="#apropos">À propos</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="burger" id="burger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</header>
 
+<!-- ACCUEIL -->
+<section id="accueil" class="section">
+  <h1>Bienvenue sur Pensées Inspirantes</h1>
 
-<section class="citation-container">
-  <h1>Citations Inspirantes - Technologie & Persévérance</h1>
-
-  <div class="citation">
-    <span>"Ce n'est pas parce que c'est difficile que nous n'osons pas, c'est parce que nous n'osons pas que c'est difficile." – Sénèque</span>
-    <button class="supprimer-btn" onclick="supprimer(this)">Supprimer</button>
-  </div>
-  <div class="citation">
-    <span>"La technologie ne remplace jamais le travail acharné, elle le complète."</span>
-    <button class="supprimer-btn" onclick="supprimer(this)">Supprimer</button>
-  </div>
-  <div class="citation">
-    <span>"Tout semble impossible jusqu'à ce que ce soit fait." – Nelson Mandela</span>
-    <button class="supprimer-btn" onclick="supprimer(this)">Supprimer</button>
-  </div>
-  <div class="citation">
-    <span>"Si vous tombez sept fois, relevez-vous huit." – Proverbe japonais</span>
-    <button class="supprimer-btn" onclick="supprimer(this)">Supprimer</button>
-  </div>
-  <div class="citation">
-    <span>"Les plus grands développeurs ont été des débutants un jour. Continuez d'apprendre."</span>
-    <button class="supprimer-btn" onclick="supprimer(this)">Supprimer</button>
-  </div>
-  <div class="citation">
-    <span>"N'abandonnez jamais. Le code qui ne fonctionne pas aujourd'hui vous apprendra quelque chose demain."</span>
-    <button class="supprimer-btn" onclick="supprimer(this)">Supprimer</button>
+  <div class="thought-container">
+    <img id="thought-image" src="" alt="Image pensée inspirante" />
+    <p id="thought"></p>
   </div>
 
-  <div class="add-section">
-    <input type="text" id="newCitation" placeholder="Écris ta citation ici...">
-    <button onclick="ajouterCitation()">Ajouter</button>
-  </div>
-
+  <center><button id="next-btn">Voir la pensée suivante</button></center>
 </section>
 
-<footer>
-  <p>&copy; 2025 - Mon Portfolio</p>
-</footer>
 
+<!-- À PROPOS -->
+<section id="apropos" class="section">
+  <h1>À propos</h1>
+  <p>
+    Pensées Inspirantes est une plateforme dédiée à partager des pensées motivantes, positives et inspirantes pour illuminer votre journée. 🌟<br>
+    Chaque citation est accompagnée d'une image pour éveiller vos émotions et stimuler votre esprit.
+  </p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <h1>Contactez-nous</h1>
+  <form onsubmit="alert('Merci pour votre message !'); return false;">
+    <input type="text" name="nom" placeholder="Votre nom" required />
+    <input type="email" name="email" placeholder="Votre email" required />
+    <textarea name="message" placeholder="Votre message" rows="6" required></textarea>
+    <input type="submit" value="Envoyer" />
+  </form>
+</section>
+
+<!-- SCRIPT -->
 <script>
-  function supprimer(button) {
-    button.parentElement.remove();
+  const pensées = [
+    { texte: "La vie est un cadeau, ne la gaspille pas. 🎁", image: "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?auto=format&fit=crop&w=400&h=300", couleur: "#f9c74f" },
+    { texte: "Petit à petit, l'oiseau fait son nid. 🐦", image: "https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=400&h=300", couleur: "#90be6d" },
+    { texte: "On récolte ce que l'on sème. 🌱", image: "https://images.unsplash.com/photo-1535930749574-1399327ce78f?auto=format&fit=crop&w=400&h=300", couleur: "#f94144" },
+    { texte: "N’aie pas peur d’échouer ; aie peur de ne pas essayer. 💪", image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=400&h=300", couleur: "#43aa8b" },
+    { texte: "Le succès vient à ceux qui osent. 🚀", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300", couleur: "#f3722c" },
+    { texte: "Chaque jour est une nouvelle opportunité. 🌞", image: "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=400&h=300", couleur: "#577590" },
+    { texte: "Apprends du passé, vis dans le présent, rêve du futur. ⏳", image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=400&h=300", couleur: "#277da1" },
+    { texte: "La persévérance est la clé du succès. 🔑", image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&h=300", couleur: "#f8961e" },
+    { texte: "Il n’y a pas de raccourci vers n’importe où qui en vaille la peine. 🛤️", image: "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=400&h=300", couleur: "#9c89b8" },
+    { texte: "Le bonheur n’est pas quelque chose de prêt à l’emploi. 😊", image: "https://images.unsplash.com/photo-1470770903676-69b98201ea1c?auto=format&fit=crop&w=400&h=300", couleur: "#e07a5f" },
+    { texte: "Chaque matin est un nouveau départ. 🌅", image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&h=300", couleur: "#6a994e" },
+    { texte: "La gratitude transforme ce que nous avons en suffisance. 🙏", image:"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300", couleur : "#f4a261" },
+    { texte: "Le changement est la seule constante dans la vie. 🔄", image: "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=400&h=300", couleur: "#2a9d8f" },
+    { texte: "Crois en toi et tout devient possible. ✨", image: "https://images.unsplash.com/photo-1468071174046-657d9d351a40?auto=format&fit=crop&w=400&h=300", couleur: "#264653" },
+    { texte: "Le succès est un voyage, pas une destination. 🛤️", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&h=300", couleur: "#e76f51" },
+    { texte: "Il faut toujours viser la lune, car même en cas d’échec, on atterrit dans les étoiles. 🌙⭐", image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&h=300", couleur: "#d62828" },
+    { texte: "Le plus grand risque est de ne prendre aucun risque. ⚠️", image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&h=300", couleur: "#f4a261" },
+    { texte: "Chaque jour apporte une nouvelle chance. 🍀", image: "https://images.unsplash.com/photo-1468071174046-657d9d351a40?auto=format&fit=crop&w=400&h=300", couleur: "#2a9d8f" },
+    { texte: "Le savoir est une arme, mais la sagesse est un bouclier. 🧠🛡️", image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&h=300", couleur: "#264653" },
+    { texte: "Sois le changement que tu veux voir dans le monde. 🌍", image: "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=400&h=300", couleur: "#9c89b8" }
+  ];
+
+  let index = 0;
+
+  function showThought(i) {
+    const p = pensées[i];
+    document.getElementById('thought').textContent = p.texte;
+    document.getElementById('thought-image').src = p.image;
+    document.body.style.backgroundColor = p.couleur;
   }
 
-  function ajouterCitation() {
-    const input = document.getElementById('newCitation');
-    const text = input.value.trim();
-    if (text) {
-      const div = document.createElement('div');
-      div.className = 'citation';
-
-      const spanTexte = document.createElement('span');
-      spanTexte.textContent = text;
-
-      const btnSupprimer = document.createElement('button');
-      btnSupprimer.textContent = 'Supprimer';
-      btnSupprimer.className = 'supprimer-btn';
-      btnSupprimer.onclick = function () {
-        div.remove();
-      };
-
-      div.appendChild(spanTexte);
-      div.appendChild(btnSupprimer);
-
-      document.querySelector('.citation-container').insertBefore(div, document.querySelector('.add-section'));
-      input.value = '';
-    } else {
-      alert('Veuillez entrer une citation.');
-    }
+  function showNextThought() {
+    index = (index + 1) % pensées.length;
+    showThought(index);
   }
+
+  document.getElementById('next-btn').addEventListener('click', showNextThought);
+
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  burger.addEventListener('click', () => {
+    menu.classList.toggle('show');
+  });
+
+  const navLinks = document.querySelectorAll('nav.menu a');
+
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(sec => {
+      sec.style.display = (sec.id === id) ? 'block' : 'none';
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + id) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      showSection(targetId);
+    });
+  });
+
+  // Show default section and first thought
+  showSection('accueil');
+  showThought(index);
 </script>
 
 </body>
 </html>
-
